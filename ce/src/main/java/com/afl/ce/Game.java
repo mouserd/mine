@@ -1,5 +1,7 @@
 package com.afl.ce;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +13,14 @@ import java.util.List;
  */
 public class Game 
 {
-    public Result run(int n, int k) {
+    /**
+     * Run game and return result
+     * 
+     * @param n number of children
+     * @param k count number
+     * @return result which contains winner and losers.
+     */
+    public Result run(final int n, final int k) {
         if (n < 1) {
             throw new IllegalArgumentException("n must be more than 1");
         }
@@ -23,17 +32,22 @@ public class Game
         List<Player> players = initPlayers(n);
         List<Player> losers = new ArrayList<Player>();
 
-        int offset = 0;
+        int starterIndex = 0;
         for (int size = n; size > 1; size = players.size()) {
-            int loserIndex = (offset + k - 1) % size;
-            Player loser = players.get(loserIndex);
-            
-            int starterIndex = loserIndex + 1 == size ? 0 : loserIndex + 1;
-            Player starter = players.get(starterIndex);
-            players.remove(loser);
-            offset = players.indexOf(starter);  
-            
+            //Find out the loser and add it into the loser list 
+            final int loserIndex = (starterIndex + k - 1) % size;
+            final Player loser = players.get(loserIndex);
             losers.add(loser);
+            
+            //Find out the next starter 
+            final int nextStarterIndex = loserIndex + 1 == size ? 0 : loserIndex + 1;
+            final Player nextStarter = players.get(nextStarterIndex);
+            
+            //Remove the loser from the player list 
+            players.remove(loser);
+
+            //Reset the index of the starter for the next loop
+            starterIndex = players.indexOf(nextStarter);  
         }
 
         final Player winner = players.get(0);
@@ -47,6 +61,21 @@ public class Game
         }
         
         return players;
+    }
+    
+    public static void main (final String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        System.out.println("Please enter n :");
+        final int n = Integer.parseInt(br.readLine());
+        
+        System.out.println("Please enter k :");
+        final int k = Integer.parseInt(br.readLine());
+        
+        final Result result = new Game().run(n, k);
+        
+        System.out.println("Winner : " + result.getWinner());
+        System.out.println("Losers : " + result.getLosers());
     }
     
 }

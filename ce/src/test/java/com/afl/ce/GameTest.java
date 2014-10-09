@@ -15,7 +15,7 @@ public class GameTest
     }
     
     @Test
-    public void Run_Less1NumberAs1stParam_ExceptionThrown() {
+    public void run_Less1NumberAs1stParam_ExceptionThrown() {
         try {
             game.run(0, 1);
             fail("fail"); 
@@ -25,7 +25,7 @@ public class GameTest
    }
     
     @Test
-    public void Run_Less1NumberAs2stParam_ExceptionThrown() {
+    public void run_Less1NumberAs2stParam_ExceptionThrown() {
         try {
             game.run(1, -1);
             fail("fail"); 
@@ -35,7 +35,7 @@ public class GameTest
     }
     
     @Test
-    public void Run_InputCase1_Correct () {
+    public void run_1ChildAnd1Count_ExpectedResultReturn () {
         final int n = 1;
         final int k = 1;
         
@@ -46,7 +46,7 @@ public class GameTest
     }
 
     @Test
-    public void Run_InputCase2_Correct () {
+    public void run_2ChildrenAnd1Count_ExpectedResultReturn () {
         final int n = 2;
         final int k = 1;
         
@@ -58,7 +58,7 @@ public class GameTest
     }
 
     @Test
-    public void Run_InputCase3_Correct () {
+    public void run_3ChildrenAnd4Count_ExpectedResultReturn () {
         final int n = 3;
         final int k = 4;
         
@@ -71,7 +71,7 @@ public class GameTest
     }
 
     @Test
-    public void Run_InputCase4_Correct () {
+    public void run_6ChildrenAnd2Count_ExpectedResultReturn () {
         final int n = 6;
         final int k = 2;
         
@@ -84,5 +84,21 @@ public class GameTest
         assertEquals(5, result.getLosers().get(2).getId());
         assertEquals(2, result.getLosers().get(3).getId());
         assertEquals(0, result.getLosers().get(4).getId());
+    }
+
+    @Test
+    public void run_6ChildrenAnd6Count_ExpectedResultReturn () {
+        final int n = 6;
+        final int k = 6;
+        
+        final Result result = game.run(n, k);
+        
+        assertEquals(3, result.getWinner().getId());
+        assertEquals(5, result.getLosers().size());
+        assertEquals(5, result.getLosers().get(0).getId());
+        assertEquals(0, result.getLosers().get(1).getId());
+        assertEquals(2, result.getLosers().get(2).getId());
+        assertEquals(1, result.getLosers().get(3).getId());
+        assertEquals(4, result.getLosers().get(4).getId());
     }
 }

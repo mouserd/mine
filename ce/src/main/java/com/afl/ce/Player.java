@@ -10,4 +10,9 @@ public class Player {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(id);
+    }
 }

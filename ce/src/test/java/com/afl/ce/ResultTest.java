@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ResultTest {
 
     @Test
-    public void Constructor_GetLosers_GetWinner_MatchesValuesPassedToConstructor() {
+    public void constructor_GetMethods_MatchesValuesPassedToConstructor() {
         final Player winner = new Player(1);
         final List<Player> losers = new ArrayList<Player>();
         
