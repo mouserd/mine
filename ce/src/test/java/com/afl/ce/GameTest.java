@@ -19,7 +19,7 @@ public class GameTest
         try {
             game.run(0, 1);
             fail("fail"); 
-        } catch (IllegalArgumentException e) { 
+        } catch (IllegalArgumentException e) {  
             assertEquals("n must be more than 1", e.getMessage()); 
         } 
    }
@@ -70,4 +70,19 @@ public class GameTest
         assertEquals(2, result.getLosers().get(1).getId());
     }
 
+    @Test
+    public void Run_InputCase4_Correct () {
+        final int n = 6;
+        final int k = 2;
+        
+        final Result result = game.run(n, k);
+        
+        assertEquals(4, result.getWinner().getId());
+        assertEquals(5, result.getLosers().size());
+        assertEquals(1, result.getLosers().get(0).getId());
+        assertEquals(3, result.getLosers().get(1).getId());
+        assertEquals(5, result.getLosers().get(2).getId());
+        assertEquals(2, result.getLosers().get(3).getId());
+        assertEquals(0, result.getLosers().get(4).getId());
+    }
 }
