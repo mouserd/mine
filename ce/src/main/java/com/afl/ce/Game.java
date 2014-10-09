@@ -24,8 +24,7 @@ public class Game
         List<Player> losers = new ArrayList<Player>();
 
         int offset = 0;
-        while (players.size() > 1) {
-            int size = players.size();
+        for (int size = n; size > 1; size = players.size()) {
             int loserIndex = (offset + k - 1) % size;
             Player loser = players.get(loserIndex);
             
